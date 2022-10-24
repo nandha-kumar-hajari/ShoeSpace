@@ -1,0 +1,33 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/animations/hello.json",
+      "sha1": "6f1f58b1c5ee73b71788a228f6f741b261cbcdc0"
+    },
+    {
+      "path": "src/assets/animations/index.ts",
+      "sha1": "962978b2af78d37a2ca1f262f2266a46542b5e6a"
+    },
+    {
+      "path": "src/assets/fonts/Lato-Bold.ttf",
+      "sha1": "542498221d97bee5bdbccf86ee8890bf8e8005c9"
+    },
+    {
+      "path": "src/assets/fonts/Lato-Light.ttf",
+      "sha1": "ad0d178564445a535b15d417f5b18019923d3bab"
+    },
+    {
+      "path": "src/assets/fonts/Lato-Regular.ttf",
+      "sha1": "e923c72eda5e50a87e18ff5c71e9ef4b3b6455a3"
+    },
+    {
+      "path": "src/assets/images/addtocart.png",
+      "sha1": "3e79683bd858baab7346581f3be794c3226542b1"
+    },
+    {
+      "path": "src/assets/images/index.ts",
+      "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    }
+  ]
+}
