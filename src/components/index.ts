@@ -1,3 +1,5 @@
 import Button from "./Button";
 import ProductCard from "./ProductCard";
-export {Button,ProductCard}
+import TextField from "./TextInput";
+import Header from "./Header";
+export {Button,ProductCard,TextField,Header}

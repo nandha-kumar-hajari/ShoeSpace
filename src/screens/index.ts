@@ -1,3 +1,5 @@
 import OnboardingScreen from './OnnboardingScreen'
 import AdminHome from './AdminHome'
-export {OnboardingScreen,AdminHome}
+import UserHome from './UserHome'
+import ProductEditScreen from './ProductEditScreen'
+export {OnboardingScreen,AdminHome,UserHome,ProductEditScreen}

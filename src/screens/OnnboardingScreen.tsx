@@ -36,7 +36,10 @@ export const OnnboardingScreen = ({navigation}: OnboardingScreenProps) => {
             text="Continue as Admin"
             onPress={() => navigation.navigate('AdminHome')}
           />
-          <Button text="Continue as User" />
+          <Button
+            text="Continue as User"
+            onPress={() => navigation.navigate('UserHome')}
+          />
         </View>
       ) : null}
     </SafeAreaView>

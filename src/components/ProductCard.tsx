@@ -10,9 +10,13 @@ import React from 'react';
 import {customHeight, customWidth, shadowStyles} from './Styles';
 import {AddToCartImg} from '../assets/images';
 import FastImage from 'react-native-fast-image';
-export const ProductCard = () => {
+interface ProductCardProps {
+  forUser?: boolean;
+  onPress?: () => void;
+}
+export const ProductCard: React.FC<ProductCardProps> = ({forUser, onPress}: ProductCardProps) => {
   return (
-    <TouchableOpacity style={styles.cardViewStyle}>
+    <TouchableOpacity onPress={onPress} style={styles.cardViewStyle}>
       {/* ImageView */}
       <View style={styles.imageView}>
         <FastImage
@@ -33,13 +37,14 @@ export const ProductCard = () => {
 
         <View style={styles.bottomDetailView}>
           <Text style={styles.brandTitleStyle}>₹999/-</Text>
-
-          <TouchableOpacity style={styles.cartIconStyle}>
-            <Image
-              style={{height: customWidth(25), width: customWidth(25)}}
-              source={AddToCartImg}
-            />
-          </TouchableOpacity>
+          {forUser ? (
+            <TouchableOpacity style={styles.cartIconStyle}>
+              <Image
+                style={{height: customWidth(25), width: customWidth(25)}}
+                source={AddToCartImg}
+              />
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     </TouchableOpacity>

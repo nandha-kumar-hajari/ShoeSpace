@@ -3,7 +3,12 @@ import React from 'react';
 
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {AdminHome, OnboardingScreen} from '../screens';
+import {
+  AdminHome,
+  OnboardingScreen,
+  ProductEditScreen,
+  UserHome,
+} from '../screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,9 +26,19 @@ export const Navigation = () => {
           component={OnboardingScreen}
           options={{headerShown: false}}
         />
-                <Stack.Screen
+        <Stack.Screen
           name="AdminHome"
           component={AdminHome}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="UserHome"
+          component={UserHome}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ProductEditScreen"
+          component={ProductEditScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
