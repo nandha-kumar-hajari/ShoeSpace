@@ -30,7 +30,7 @@ export const OnnboardingScreen = ({navigation}: OnboardingScreenProps) => {
         loop={false}
       />
 
-      {true ? (
+      {showButtons ? (
         <View>
           <Button
             text="Continue as Admin"

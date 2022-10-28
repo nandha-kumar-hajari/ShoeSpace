@@ -4,13 +4,15 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Style from './AdminHomeStyles';
 import {customWidth} from '../components/Styles';
 import {ProductCard} from '../components';
+import {useSelector, useDispatch} from 'react-redux';
 
 export const UserHome = () => {
+  const productsFromRedux = useSelector(state => state.appData.catalogProducts);
 
 
-  const renderItem = () =>{
+  const renderItem = ({item}) =>{
     return(
-      <ProductCard/>
+      <ProductCard itemData={item}/>
     )
   }
 
@@ -22,7 +24,7 @@ export const UserHome = () => {
       </View>
 
       <FlatList
-        data={[1, 2, 3, 4, 5, 6]}
+        data={productsFromRedux}
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}

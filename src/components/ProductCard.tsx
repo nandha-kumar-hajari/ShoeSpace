@@ -13,15 +13,20 @@ import FastImage from 'react-native-fast-image';
 interface ProductCardProps {
   forUser?: boolean;
   onPress?: () => void;
+  itemData: any;
 }
-export const ProductCard: React.FC<ProductCardProps> = ({forUser, onPress}: ProductCardProps) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+  forUser,
+  onPress,
+  itemData,
+}: ProductCardProps) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.cardViewStyle}>
       {/* ImageView */}
       <View style={styles.imageView}>
         <FastImage
           source={{
-            uri: 'https://i.ibb.co/pZX5Vy8/puma.png',
+            uri: itemData.imageUrl ? itemData.imageUrl : '',
             priority: FastImage.priority.high,
           }}
           style={{height: 80, width: 80, zIndex: 2}}
@@ -30,13 +35,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({forUser, onPress}: Prod
 
       {/* Information View */}
       <View style={styles.infoViewStyle}>
-        <Text style={styles.brandTitleStyle}>NIKE</Text>
+        <Text style={styles.brandTitleStyle}>
+          {itemData.brandName ? itemData.brandName : ''}
+        </Text>
         <Text numberOfLines={2} style={styles.productTitleStyle}>
-          Downshifter Running Shoes for Men
+          {itemData.productName ? itemData.productName : ''}
         </Text>
 
         <View style={styles.bottomDetailView}>
-          <Text style={styles.brandTitleStyle}>₹999/-</Text>
+          <Text style={styles.brandTitleStyle}>
+            ₹{itemData.price ? itemData.price : ''}/-
+          </Text>
           {forUser ? (
             <TouchableOpacity style={styles.cartIconStyle}>
               <Image

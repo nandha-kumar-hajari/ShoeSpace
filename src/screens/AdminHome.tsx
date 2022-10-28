@@ -1,5 +1,5 @@
 import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Style from './AdminHomeStyles';
 import {customWidth} from '../components/Styles';
@@ -12,6 +12,7 @@ import {ProductCard} from '../components';
 import {AddIcon} from '../assets/images';
 import {useSelector, useDispatch} from 'react-redux';
 import * as wpActions from '../redux/actions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface AdminHomeProps {
   navigation: NativeStackNavigationProp<ParamListBase>;
@@ -23,9 +24,13 @@ export const AdminHome: React.FC<AdminHomeProps> = ({
 }: AdminHomeProps) => {
   const productsFromRedux = useSelector(state => state.appData.catalogProducts);
 
-  const renderItem = () => {
+  const renderItem = ({item}: any) => {
+    console.log('Product item', item);
     return (
-      <ProductCard onPress={() => navigation.navigate('ProductEditScreen')} />
+      <ProductCard
+        itemData={item}
+        onPress={() => navigation.navigate('ProductEditScreen', item)}
+      />
     );
   };
 
@@ -52,6 +57,18 @@ export const AdminHome: React.FC<AdminHomeProps> = ({
         keyExtractor={(item, index) => index.toString()}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={() => {
+          return (
+            <Text
+              style={{
+                color: '#fff',
+                marginVertical: customWidth(300),
+                fontFamily: 'Lato-Bold',
+              }}>
+              Please add products to continue
+            </Text>
+          );
+        }}
       />
     </SafeAreaView>
   );

@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Style from './ProductEditStyles';
 import {customWidth} from '../components/Styles';
@@ -12,7 +12,7 @@ import type {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import {useSelector, useDispatch} from 'react-redux';
-import * as wpActions from '../redux/actions'
+import * as wpActions from '../redux/actions';
 
 interface ProductEditScreenProps {
   navigation: NativeStackNavigationProp<ParamListBase>;
@@ -24,22 +24,48 @@ export const ProductEditScreen: React.FC<ProductEditScreenProps> = ({
 }: ProductEditScreenProps) => {
   const dispatch = useDispatch();
   const productData = useSelector(state => state.appData.catalogProducts);
+  const [productId, setProductId] = useState<number>();
   const [brandName, setBrandName] = useState<string>('');
   const [productName, setProductName] = useState<string>('');
   const [price, setPrice] = useState<number>();
   const [imageUrl, setImageUrl] = useState<string>('');
+  const params = route.params;
+  console.log('route params', params);
+
+  useEffect(() => {
+    let isSubscribed = true;
+    if (params) {
+      setProductId(params.id);
+      setBrandName(params.brandName);
+      setProductName(params.productName);
+      setImageUrl(params.imageUrl);
+      setPrice(params.price);
+    }
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, []);
 
   const onPressSaveProduct = () => {
-    productData.push({
-        id:productData.length,
-        brandName:brandName,
-        productName:productName,
-        price:price,
-        imageUrl
-    })
-    dispatch(wpActions.saveCatalogProducts(productData))
-    navigation.goBack()
-
+    if (params) {
+      productData[productId].productName = productName;
+      productData[productId].brandName = brandName;
+      productData[productId].price = price;
+      productData[productId].imageUrl = imageUrl;
+      console.log('Modified product data', productData);
+      dispatch(wpActions.saveCatalogProducts(productData));
+    } else {
+      productData.push({
+        id: productData.length,
+        brandName: brandName,
+        productName: productName,
+        price: price,
+        imageUrl,
+      });
+      dispatch(wpActions.saveCatalogProducts(productData));
+    }
+    navigation.popToTop();
   };
 
   return (
@@ -51,21 +77,25 @@ export const ProductEditScreen: React.FC<ProductEditScreenProps> = ({
 
       <TextField
         label="Brand Name"
+        value={brandName}
         onChangeText={(text: string) => setBrandName(text)}
       />
 
       <TextField
         label="Product Name"
+        value={productName}
         onChangeText={(text: string) => setProductName(text)}
       />
 
       <TextField
         label="Price (in ₹)"
+        value={price}
         onChangeText={(text: number) => setPrice(text)}
       />
 
       <TextField
         label="Image URL"
+        value={imageUrl}
         onChangeText={(text: string) => setImageUrl(text)}
       />
 
