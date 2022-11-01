@@ -8,33 +8,27 @@ import {
 } from 'react-native';
 import React from 'react';
 import {customHeight, customWidth, shadowStyles} from './Styles';
-import {AddToCartImg} from '../assets/images';
+import {DeleteImg} from '../assets/images';
 import FastImage from 'react-native-fast-image';
-import { SharedElement } from 'react-navigation-shared-element';
-interface ProductCardProps {
-  forUser?: boolean;
-  onPress?: () => void;
+interface CartCardProps {
+  onPressDelete: () => void;
   itemData: any;
 }
-export const ProductCard: React.FC<ProductCardProps> = ({
-  forUser,
-  onPress,
+export const CartCard: React.FC<CartCardProps> = ({
+  onPressDelete,
   itemData,
-}: ProductCardProps) => {
+}: CartCardProps) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.cardViewStyle}>
+    <View style={styles.cardViewStyle}>
       {/* ImageView */}
       <View style={styles.imageView}>
-      <SharedElement id={`${itemData.imageUrl}`}>
-
         <FastImage
           source={{
             uri: itemData.imageUrl ? itemData.imageUrl : '',
             priority: FastImage.priority.high,
           }}
-          style={{height: 80, width: 80, zIndex: 2}}
+          style={{height: 40, width: 40, zIndex: 2}}
         />
-         </SharedElement>
       </View>
 
       {/* Information View */}
@@ -50,37 +44,49 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <Text style={styles.brandTitleStyle}>
             ₹{itemData.price ? itemData.price : ''}/-
           </Text>
-          {forUser ? (
-            <TouchableOpacity style={styles.cartIconStyle}>
-              <Image
-                style={{height: customWidth(25), width: customWidth(25)}}
-                source={AddToCartImg}
-              />
-            </TouchableOpacity>
-          ) : null}
+
+          <TouchableOpacity onPress={onPressDelete} style={styles.deleteButtonStyle}>
+            <Image
+              style={{
+                height: customWidth(25),
+                width: customWidth(25),
+                marginRight: 4,
+              }}
+              source={DeleteImg}
+            />
+            <Text
+              style={{
+                fontFamily: 'Lato-Regular',
+                fontSize: 12,
+                color: '#fff',
+              }}>
+              Delete
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
-export default ProductCard;
+export default CartCard;
 
 const styles = StyleSheet.create({
   cardViewStyle: {
     backgroundColor: '#000',
-    borderRadius: 13,
-    width: customWidth(410),
+    borderRadius: 8,
+    width: customWidth(380),
     marginVertical: customWidth(10),
-    padding: customWidth(20),
+    paddingVertical: customWidth(30),
+    paddingHorizontal: customWidth(20),
     flexDirection: 'row',
-    alignItems: 'center',
+    //   alignItems: 'center',
   },
   imageView: {
     backgroundColor: '#1A202C',
-    height: customWidth(120),
-    width: customWidth(130),
-    borderRadius: 11,
+    height: customWidth(60),
+    width: customWidth(70),
+    borderRadius: 3,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -99,13 +105,17 @@ const styles = StyleSheet.create({
   bottomDetailView: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: customWidth(30),
+    marginTop: customWidth(50),
+    width: customWidth(240),
     justifyContent: 'space-between',
   },
-  cartIconStyle: {
-    backgroundColor: '#6C7EE3',
-    padding: customWidth(6),
-    borderRadius: 100,
+  deleteButtonStyle: {
+    backgroundColor: '#BA3430',
+    paddingVertical: customWidth(5),
+    paddingHorizontal: customWidth(10),
+    borderRadius: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
     ...shadowStyles,
   },
 });

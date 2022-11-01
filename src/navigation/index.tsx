@@ -8,13 +8,17 @@ import {
   OnboardingScreen,
   ProductEditScreen,
   UserHome,
+  ProductDetailsScreen,
+  CartScreen,
 } from '../screens';
+import {createSharedElementStackNavigator} from 'react-navigation-shared-element';
 
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
+const Stack = createSharedElementStackNavigator();
 
 export const Navigation = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={{colors: {background: '#1A202C'}}}>
       <Stack.Navigator
         screenOptions={{
           gestureEnabled: false,
@@ -41,6 +45,11 @@ export const Navigation = () => {
           component={ProductEditScreen}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="ProductDetailsScreen"
+          component={ProductDetailsScreen}
+        />
+        <Stack.Screen name="CartScreen" component={CartScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

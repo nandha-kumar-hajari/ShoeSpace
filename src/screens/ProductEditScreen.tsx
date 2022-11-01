@@ -29,6 +29,8 @@ export const ProductEditScreen: React.FC<ProductEditScreenProps> = ({
   const [productName, setProductName] = useState<string>('');
   const [price, setPrice] = useState<number>();
   const [imageUrl, setImageUrl] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
+
   const params = route.params;
   console.log('route params', params);
 
@@ -40,6 +42,7 @@ export const ProductEditScreen: React.FC<ProductEditScreenProps> = ({
       setProductName(params.productName);
       setImageUrl(params.imageUrl);
       setPrice(params.price);
+      setDescription(params.description);
     }
 
     return () => {
@@ -53,6 +56,7 @@ export const ProductEditScreen: React.FC<ProductEditScreenProps> = ({
       productData[productId].brandName = brandName;
       productData[productId].price = price;
       productData[productId].imageUrl = imageUrl;
+      productData[productId].description = description;
       console.log('Modified product data', productData);
       dispatch(wpActions.saveCatalogProducts(productData));
     } else {
@@ -61,7 +65,8 @@ export const ProductEditScreen: React.FC<ProductEditScreenProps> = ({
         brandName: brandName,
         productName: productName,
         price: price,
-        imageUrl,
+        imageUrl: imageUrl,
+        description: description,
       });
       dispatch(wpActions.saveCatalogProducts(productData));
     }
@@ -72,6 +77,7 @@ export const ProductEditScreen: React.FC<ProductEditScreenProps> = ({
     <SafeAreaView style={Style.mainViewStyle}>
       <Header
         screenName="Edit Product"
+        type="normal"
         onClickBack={() => navigation.goBack()}
       />
 
@@ -97,6 +103,14 @@ export const ProductEditScreen: React.FC<ProductEditScreenProps> = ({
         label="Image URL"
         value={imageUrl}
         onChangeText={(text: string) => setImageUrl(text)}
+      />
+
+      <TextField
+        label="Description"
+        value={description}
+        multiLine={true}
+        numberOfLines={4}
+        onChangeText={(text: string) => setDescription(text)}
       />
 
       <Button text="Submit" onPress={onPressSaveProduct} />

@@ -22,12 +22,20 @@
       "sha1": "e923c72eda5e50a87e18ff5c71e9ef4b3b6455a3"
     },
     {
+      "path": "src/assets/images/addIcon.png",
+      "sha1": "1817bd763c997a4d6af40454c43202875b6cc875"
+    },
+    {
       "path": "src/assets/images/addtocart.png",
       "sha1": "3e79683bd858baab7346581f3be794c3226542b1"
     },
     {
+      "path": "src/assets/images/back.png",
+      "sha1": "69150c186306d34563bf49f97956929d93bf35c4"
+    },
+    {
       "path": "src/assets/images/index.ts",
-      "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      "sha1": "5432397da719e5eafc654f3dc382f80488fb74fd"
     }
   ]
 }

@@ -1,13 +1,18 @@
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import {customWidth} from './Styles';
-import {BackIcon} from '../assets/images';
+import {BackIcon, BackWhite} from '../assets/images';
 
-interface HeaderProps{
-    screenName?:string
-    onClickBack?:()=>void
+interface HeaderProps {
+  screenName?: string;
+  onClickBack?: () => void;
+  type: string;
 }
-export const Header:React.FC<HeaderProps> =({screenName,onClickBack}:HeaderProps) => {
+export const Header: React.FC<HeaderProps> = ({
+  screenName,
+  onClickBack,
+  type,
+}: HeaderProps) => {
   return (
     <View
       style={{
@@ -20,14 +25,14 @@ export const Header:React.FC<HeaderProps> =({screenName,onClickBack}:HeaderProps
       }}>
       <TouchableOpacity onPress={onClickBack}>
         <Image
-          source={BackIcon}
+          source={type === 'dark' ? BackWhite : BackIcon}
           style={{height: customWidth(35), width: customWidth(35)}}
         />
       </TouchableOpacity>
       <Text
         numberOfLines={1}
         style={{
-          color: '#1A202C',
+          color: type === 'dark' ? '#fff' : '#1A202C',
           fontFamily: 'Lato-Regular',
           fontSize: 17,
           marginLeft: customWidth(15),
@@ -37,5 +42,5 @@ export const Header:React.FC<HeaderProps> =({screenName,onClickBack}:HeaderProps
       </Text>
     </View>
   );
-}
-export default Header
+};
+export default Header;
